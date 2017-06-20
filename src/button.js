@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class Button extends Component {
-  printConsole(name) {
-    console.log(name);
-  }
-
-  render() {
-  const name = this.props.name;
+const Button = (props) => {
     return (
-      <button type="button" onClick={
-        () => { this.printConsole(name) }
-      }> {name} </button>
+      <span>
+        <button type="button"
+          className="Calculator-buttons"
+          value={props.value}
+          onClick={(e) => props.onClick(e.target.value)}>
+            {props.value}
+        </button>
+      </span>
     );
-  }
 }
+
+export default Button;

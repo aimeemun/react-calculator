@@ -9,6 +9,22 @@
   color: white;
 }
 
+.Calculator-buttons {
+  height: 50px;
+  width: 50px;
+  margin-left: 5px;
+  font-size: 15px;
+  margin-top: 5px;
+}
+
+.Calculator-input {
+  width: 155px;
+  height: 20px;
+  margin-top:50px;
+  margin-left: 5px;
+  font-size: 15px;
+}
+
 .App-intro {
   font-size: large;
 }

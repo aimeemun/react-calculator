@@ -1,40 +1,68 @@
 import React, { Component } from 'react';
+import './App.css';
 import Button from './button';
 
 class App extends Component {
-  render() {
-    const ButtonsList = [];
-    for (var i = 0; i < 10; i++) {
-      const x = i;
-      ButtonsList.push(<Button key={x} name={x}/>);
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentInput: '',
+      previousInput: '',
+      addNumbers: false
+    };
+  };
+
+  updateInputTextField = (value) => {
+    this.setState({previousInput: value});
+    if (this.state.addNumbers === true) {
+      this.setState({previousInput: +value + +this.state.previousInput});
+      this.setState({addNumbers: false});
+    } else if (this.state.subtractNumbers === true) {
+      this.setState({previousInput: +this.state.previousInput - +value});
+      this.setState({subtractNumbers: false});
     }
+  }
+
+  addNumbers = () => {
+    this.setState({addNumbers: true});
+  }
+  subtractNumbers = () => {
+    this.setState({subtractNumbers: true});
+  }
+
+  clearField = () => {
+    this.setState({previousInput: ''});
+  }
+
+  render() {
     return (
       <div className="App">
-        <div className="App-header"> </div>
-        <div className="Calculator-input">
-          <input type="text" id="screen"></input>
-        </div>
-        { /*probably put this inside a table*/ }
-        <div className="Calculator-buttons">
-          <table>
-            <tbody>
-              <tr>
-                <td><Button name="7"/></td>
-                <td><Button name="8"/></td>
-                <td><Button name="9"/></td>
-              </tr>
-              <tr>
-                <td><Button name="4"/></td>
-                <td><Button name="5"/></td>
-                <td><Button name="6"/></td>
-              </tr>
-              <tr>
-                <td><Button name="1"/></td>
-                <td><Button name="2"/></td>
-                <td><Button name="3"/></td>
-              </tr>
-            </tbody>
-          </table>
+        <div>
+          <div>
+            <input type="text" className="Calculator-input" value={this.state.previousInput}>
+            </input>
+          </div>  
+          <div>
+            <Button value={1} onClick={this.updateInputTextField}/>
+            <Button value={2} onClick={this.updateInputTextField}/>
+            <Button value={3} onClick={this.updateInputTextField}/>
+          </div>
+          <div>
+            <Button value={4} onClick={this.updateInputTextField}/>
+            <Button value={5} onClick={this.updateInputTextField}/>
+            <Button value={6} onClick={this.updateInputTextField}/>
+          </div>
+          <div>
+            <Button value={7} onClick={this.updateInputTextField}/>
+            <Button value={8} onClick={this.updateInputTextField}/>
+            <Button value={9} onClick={this.updateInputTextField}/>
+          </div>
+          <div>
+            <Button value={'+'} onClick={this.addNumbers}/>
+            <Button value={'-'} onClick={this.subtractNumbers}/>
+            <Button value={'clear'} onClick={this.clearField}/>
+          </div>
         </div>
       </div>
     );
